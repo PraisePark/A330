@@ -70,15 +70,70 @@
     <!-- 좌석 번호 선택 -->
     <h2>좌석 번호 선택</h2>
     <div class="seat-section">
-        <!-- Seat buttons -->
+        <div class="seat-row">
+            <button class="button seat-button" onclick="showOptions('2H')">2H</button>
+            <button class="button seat-button" onclick="showOptions('2G')">2G</button>
+            <button class="button seat-button" onclick="showOptions('2E')">2E</button>
+            <button class="button seat-button" onclick="showOptions('2D')">2D</button>
+            <button class="button seat-button" onclick="showOptions('2B')">2B</button>
+            <button class="button seat-button" onclick="showOptions('2A')">2A</button>
+        </div>
+        <div class="seat-row">
+            <button class="button seat-button" onclick="showOptions('1H')">1H</button>
+            <button class="button seat-button" onclick="showOptions('1G')">1G</button>
+            <button class="button seat-button" onclick="showOptions('1E')">1E</button>
+            <button class="button seat-button" onclick="showOptions('1D')">1D</button>
+            <button class="button seat-button" onclick="showOptions('1B')">1B</button>
+            <button class="button seat-button" onclick="showOptions('1A')">1A</button>
+        </div>
+        <div class="seat-row">
+            <button class="button seat-button" onclick="showOptions('P1')">P1</button>
+            <button class="button seat-button" onclick="showOptions('F1')">F1</button>
+            <button class="button seat-button" onclick="showOptions('P2')">P2</button>
+            <button class="button seat-button" onclick="showOptions('F2')">F2</button>
+        </div>
     </div>
 
     <!-- 좌석 옵션을 표시하는 섹션 -->
     <div id="options-section" class="options-section">
         <h3 id="seat-title"></h3>
 
-        <!-- 기타 옵션 버튼 -->
-        
+        <h4>1st Meal</h4>
+        <button class="button" id="menu1">Menu1</button>
+        <button class="button" id="menu2">Menu2</button>
+        <button class="button" id="reject1">거부</button>
+
+        <h4>2nd Meal</h4>
+        <button class="button" id="menu1_2">Menu1</button>
+        <button class="button" id="menu2_2">Menu2</button>
+        <button class="button" id="reject2">거부</button>
+
+        <h4>깨워도 되는지</h4>
+        <button class="button" id="wakeYes">Yes</button>
+        <button class="button" id="wakeNo">No</button>
+
+        <h4>라면</h4>
+        <button class="button" id="shinRamen">신라면 블랙</button>
+        <button class="button" id="cupNoodles">컵누들</button>
+
+        <h4>콜라</h4>
+        <button class="button" id="colaYes">Yes</button>
+        <button class="button" id="colaNo">No</button>
+
+        <h4>차</h4>
+        <button class="button" id="coldTea">Cold</button>
+        <button class="button" id="hotTea">Hot</button>
+        <button class="button" id="noTea">No</button>
+
+        <h4>충전기 대여</h4>
+        <button class="button" id="chargeYes">Yes</button>
+        <button class="button" id="chargeNo">No</button>
+
+        <h4>커피</h4>
+        <button class="button" id="coldCoffee">Cold</button>
+        <button class="button" id="hotCoffee">Hot</button>
+        <button class="button" id="noCoffee">No</button>
+
         <!-- 메모 섹션 -->
         <div class="note-section">
             <h4>메모</h4>
@@ -89,7 +144,10 @@
     <script>
         function showOptions(seat) {
             document.getElementById('seat-title').textContent = seat + " 페이지";
-            document.getElementById('options-section').classList.add('active');
+
+            let optionsSection = document.getElementById('options-section');
+            optionsSection.classList.add('active');
+
             resetButtonColors();
             updateButtonIds(seat);
         }
@@ -105,7 +163,7 @@
         }
 
         function updateButtonIds(seat) {
-            // Button click event setup
+            // 버튼 이벤트 설정
         }
     </script>
 
