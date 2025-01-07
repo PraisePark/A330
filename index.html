@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>간단한 오프라인 앱</title>
+    <title>A330-300Seatmap</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -45,6 +45,7 @@
         .options-section {
             margin-top: 30px;
             display: none;
+            text-align: left;
         }
         .options-section.active {
             display: block;
@@ -99,40 +100,40 @@
         <h3 id="seat-title"></h3>
 
         <h4>1st Meal</h4>
-        <button class="button" id="menu1">Menu1</button>
-        <button class="button" id="menu2">Menu2</button>
-        <button class="button" id="reject1">거부</button>
+        <button class="button" onclick="toggleButtonColor('menu1')">Menu1</button>
+        <button class="button" onclick="toggleButtonColor('menu2')">Menu2</button>
+        <button class="button" onclick="toggleButtonColor('reject1')">거부</button>
 
         <h4>2nd Meal</h4>
-        <button class="button" id="menu1_2">Menu1</button>
-        <button class="button" id="menu2_2">Menu2</button>
-        <button class="button" id="reject2">거부</button>
+        <button class="button" onclick="toggleButtonColor('menu1_2')">Menu1</button>
+        <button class="button" onclick="toggleButtonColor('menu2_2')">Menu2</button>
+        <button class="button" onclick="toggleButtonColor('reject2')">거부</button>
 
         <h4>깨워도 되는지</h4>
-        <button class="button" id="wakeYes">Yes</button>
-        <button class="button" id="wakeNo">No</button>
+        <button class="button" onclick="toggleButtonColor('wakeYes')">Yes</button>
+        <button class="button" onclick="toggleButtonColor('wakeNo')">No</button>
 
         <h4>라면</h4>
-        <button class="button" id="shinRamen">신라면 블랙</button>
-        <button class="button" id="cupNoodles">컵누들</button>
+        <button class="button" onclick="toggleButtonColor('shinRamen')">신라면 블랙</button>
+        <button class="button" onclick="toggleButtonColor('cupNoodles')">컵누들</button>
 
         <h4>콜라</h4>
-        <button class="button" id="colaYes">Yes</button>
-        <button class="button" id="colaNo">No</button>
+        <button class="button" onclick="toggleButtonColor('colaYes')">Yes</button>
+        <button class="button" onclick="toggleButtonColor('colaNo')">No</button>
 
         <h4>차</h4>
-        <button class="button" id="coldTea">Cold</button>
-        <button class="button" id="hotTea">Hot</button>
-        <button class="button" id="noTea">No</button>
+        <button class="button" onclick="toggleButtonColor('coldTea')">Cold</button>
+        <button class="button" onclick="toggleButtonColor('hotTea')">Hot</button>
+        <button class="button" onclick="toggleButtonColor('noTea')">No</button>
 
         <h4>충전기 대여</h4>
-        <button class="button" id="chargeYes">Yes</button>
-        <button class="button" id="chargeNo">No</button>
+        <button class="button" onclick="toggleButtonColor('chargeYes')">Yes</button>
+        <button class="button" onclick="toggleButtonColor('chargeNo')">No</button>
 
         <h4>커피</h4>
-        <button class="button" id="coldCoffee">Cold</button>
-        <button class="button" id="hotCoffee">Hot</button>
-        <button class="button" id="noCoffee">No</button>
+        <button class="button" onclick="toggleButtonColor('coldCoffee')">Cold</button>
+        <button class="button" onclick="toggleButtonColor('hotCoffee')">Hot</button>
+        <button class="button" onclick="toggleButtonColor('noCoffee')">No</button>
 
         <!-- 메모 섹션 -->
         <div class="note-section">
@@ -142,29 +143,23 @@
     </div>
 
     <script>
-        function showOptions(seat) {
-            document.getElementById('seat-title').textContent = seat + " 페이지";
+        document.addEventListener('DOMContentLoaded', function() {
+            // showOptions 함수는 좌석을 선택했을 때 실행됩니다.
+            function showOptions(seat) {
+                document.getElementById('seat-title').textContent = seat + " 페이지";
+                document.getElementById('options-section').classList.add('active');
+            }
 
-            let optionsSection = document.getElementById('options-section');
-            optionsSection.classList.add('active');
+            // 클릭된 버튼 색을 토글합니다.
+            function toggleButtonColor(buttonId) {
+                let button = document.getElementById(buttonId);
+                button.classList.toggle('clicked');
+            }
 
-            resetButtonColors();
-            updateButtonIds(seat);
-        }
-
-        function toggleButtonColor(buttonId) {
-            let button = document.getElementById(buttonId);
-            button.classList.toggle('clicked');
-        }
-
-        function resetButtonColors() {
-            let buttons = document.querySelectorAll('.button');
-            buttons.forEach(button => button.classList.remove('clicked'));
-        }
-
-        function updateButtonIds(seat) {
-            // 버튼 이벤트 설정
-        }
+            // 전역 함수로 설정된 showOptions와 toggleButtonColor는 이렇게 사용됩니다.
+            window.showOptions = showOptions;
+            window.toggleButtonColor = toggleButtonColor;
+        });
     </script>
 
 </body>
