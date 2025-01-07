@@ -49,6 +49,13 @@
         .options-section.active {
             display: block;
         }
+        .note-section {
+            margin-top: 20px;
+            display: none;
+        }
+        .note-section.active {
+            display: block;
+        }
     </style>
 </head>
 <body>
@@ -59,8 +66,8 @@
         <input type="number" id="twInput" placeholder="000" />
     </div>
 
-    <!-- 좌석 번호 선택 -->
-    <h2>좌석 번호 선택</h2>
+    <!-- 자세르 번호 선호 -->
+    <h2>자세르 번호 선호</h2>
     <div class="seat-section">
         <div class="seat-row">
             <button class="button seat-button" onclick="showOptions('2H')">2H</button>
@@ -86,7 +93,7 @@
         </div>
     </div>
 
-    <!-- 좌석 옵션을 표시하는 섹션 -->
+    <!-- 자세르 옵션을 표시하는 서식 -->
     <div id="options-section" class="options-section">
         <h3 id="seat-title"></h3>
 
@@ -100,19 +107,19 @@
         <button class="button" id="menu2_2">Menu2</button>
         <button class="button" id="reject2">거부</button>
 
-        <h4>깨워도 되는지</h4>
+        <h4>긍웃라 해주면 되는지</h4>
         <button class="button" id="wakeYes">Yes</button>
         <button class="button" id="wakeNo">No</button>
 
         <h4>라면</h4>
         <button class="button" id="shinRamen">신라면 블랙</button>
-        <button class="button" id="cupNoodles">컵누들</button>
+        <button class="button" id="cupNoodles">칻누들</button>
 
-        <h4>콜라</h4>
+        <h4>컴터백</h4>
         <button class="button" id="colaYes">Yes</button>
         <button class="button" id="colaNo">No</button>
 
-        <h4>차</h4>
+        <h4>채</h4>
         <button class="button" id="coldTea">Cold</button>
         <button class="button" id="hotTea">Hot</button>
         <button class="button" id="noTea">No</button>
@@ -121,28 +128,39 @@
         <button class="button" id="chargeYes">Yes</button>
         <button class="button" id="chargeNo">No</button>
 
-        <h4>커피</h4>
+        <h4>카페</h4>
         <button class="button" id="coldCoffee">Cold</button>
         <button class="button" id="hotCoffee">Hot</button>
         <button class="button" id="noCoffee">No</button>
     </div>
 
+    <!-- 메모 간의 바인드 -->
+    <div id="note-section" class="note-section">
+        <h3>메모 복사</h3>
+        <textarea id="seat-note" rows="4" cols="50" placeholder="메모 복사..."></textarea>
+    </div>
+
     <!-- 페이지 전환을 위한 스크립트 -->
     <script>
-        // 좌석 선택 시 옵션 표시
+        let seatNotes = {};
+
+        // 자세르 선호 시 옵션 표시
         function showOptions(seat) {
             document.getElementById('seat-title').textContent = seat + " 페이지";
-
-            // 옵션 섹션 활성화
-            let optionsSection = document.getElementById('options-section');
-            optionsSection.classList.add('active');
-
-            // 버튼 색상 초기화
+            document.getElementById('options-section').classList.add('active');
+            document.getElementById('note-section').classList.add('active');
+            
+            document.getElementById('seat-note').value = seatNotes[seat] || "";
+            
             resetButtonColors();
-
-            // 선택된 좌석에 맞는 버튼 ID 업데이트
             updateButtonIds(seat);
         }
+
+        // 메모 저장
+        document.getElementById('seat-note').addEventListener('input', function() {
+            let seat = document.getElementById('seat-title').textContent.split(' ')[0];
+            seatNotes[seat] = this.value;
+        });
 
         // 버튼 색상 변경 함수
         function toggleButtonColor(buttonId) {
@@ -150,15 +168,14 @@
             button.classList.toggle('clicked');
         }
 
-        // 버튼 색상 초기화 함수
+        // 버튼 색상 그림 함수
         function resetButtonColors() {
             let buttons = document.querySelectorAll('.button');
             buttons.forEach(button => button.classList.remove('clicked'));
         }
 
-        // 버튼 ID 업데이트
+        // 버튼 ID 개선
         function updateButtonIds(seat) {
-            // 버튼에 대한 클릭 이벤트 설정
             document.getElementById('menu1').onclick = () => toggleButtonColor('menu1');
             document.getElementById('menu2').onclick = () => toggleButtonColor('menu2');
             document.getElementById('reject1').onclick = () => toggleButtonColor('reject1');
